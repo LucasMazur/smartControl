@@ -1,8 +1,43 @@
-import React from 'react'
-import { Text } from 'react-native'
+import React, { useState } from 'react'
+import { Text, TextInput, View, StyleSheet } from 'react-native'
 
-export default props => {
+export default ({ route, navigation }) => {
+    const [user, setUser] = useState(route.params ? route.params : {})
     return (
-        <Text>UserForm</Text>
+        <View style={style.form}>
+            <Text>Name</Text>
+            <TextInput
+                style={style.input}
+                onChange={name => setUser({...user, name})}
+                placeholder="Informe o Nome"
+                value={user.name}
+            />
+            <Text>Email</Text>
+            <TextInput
+                style={style.input}
+                onChange={name => setUser({...user, name})}
+                placeholder="Informe o email"
+                value={user.email}
+            />
+            <Text>Avatar URL</Text>
+            <TextInput
+                style={style.input}
+                onChange={name => setUser({...user, name})}
+                placeholder="Informe a URL do seu avatar"
+                value={user.avatarUrl}
+            />
+        </View>
     )
 }
+
+const style = StyleSheet.create({
+    form: {
+        padding: 12
+    },
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 10,
+    }
+})
