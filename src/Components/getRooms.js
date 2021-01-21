@@ -1,40 +1,52 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import { Avatar, Button, Divider, Icon, ListItem } from 'react-native-elements'
+import React, { useState, useEffect } from 'react';
+import { Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-elements'
 
-// import { Container } from './styles';
+export default props => {
 
-export default () => {
+    const [data, setData] = useState ('')
 
-    const [teste, setTeste] = useState ('')
-
-    fetch('http://172.16.30.171:3001/api/userDevices/get')
-    .then((res) => res.json())
-    .then((json) => {
-        setTeste(json)
-    })
+    useEffect(() => {
+        fetch('http://172.16.30.171:3001/api/userRooms/get')
+        .then((res) => res.json())
+        .then((json) => {
+            setData(json)
+        })
+    }, [data])
 
     function getDevice ({item: device}) {
-        console.log(device)
         return (
-            <ListItem key={device._id} 
-            bottomDivider>
-                <Avatar source={{uri: device.imageUrl}} />
-                <ListItem.Content>
-                    <ListItem.Title>{device.deviceName}</ListItem.Title>                
-                    <ListItem.Subtitle>{device.roomName}</ListItem.Subtitle>
-                </ListItem.Content>
-            </ListItem>
+            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Room", {room: device.roomName, image: device.imageUrl})}>
+                <Avatar style={styles.pins} source={{uri: device.imageUrl}} />
+                <Text>{device.roomName}</Text>
+            </TouchableOpacity>
         )
     }
 
     return (
-        <View>
-            <FlatList
-                keyExtractor={user => user._id.toString()}
-                data={teste}
-                renderItem={getDevice}
-            />
-        </View>
+        <FlatList
+            numColumns={2}
+            keyExtractor={user => user._id.toString()}
+            data={data}
+            renderItem={getDevice}
+        />
     )
 }
+
+const styles = StyleSheet.create({ 
+    button: {
+        padding: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: '#D3D3D3',
+        width: 120,
+        height: 120,
+        margin: 15,
+        borderRadius: 20,
+    },
+    pins: {
+        margin: 15,
+        width: 40,
+        height: 40,
+    }
+})

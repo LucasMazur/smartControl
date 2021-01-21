@@ -1,30 +1,66 @@
 import React, { useState } from 'react'
-import { Text, TextInput, View, StyleSheet } from 'react-native'
+import { Text, TextInput, View, StyleSheet, Button } from 'react-native'
 
 export default ({ route, navigation }) => {
-    const [user, setUser] = useState(route.params ? route.params : {})
+    
+    const [device, setDevice] = useState(route.params ? route.params : {})
+
+    // const [deviceName, setDeviceName] = useState('')
+    // const [roomName, setRoomName] = useState('')
+    // const [ip, setIp] = useState('')
+
+    function submitData() {
+        // fetch('http://172.16.30.171:3001/api/userDevices/save', {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         roomName: device.roomName,
+        //         deviceName: device.deviceName,
+        //         ip: device.ip
+        //     })
+        // })
+
+        fetch('http://172.16.30.171:3001/api/userRooms/save', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                roomName: device.roomName
+            })
+        })
+    }
+
     return (
         <View style={style.form}>
-            <Text>Name</Text>
+            <Text>Nome do Cômodo</Text>
             <TextInput
                 style={style.input}
-                onChange={name => setUser({...user, name})}
-                placeholder="Informe o Nome"
-                value={user.name}
+                onChangeText={(roomName) => setDevice({...device, roomName})}                
+                placeholder="Informe o Nome do Cômodo"
+                value={device.roomName}
             />
-            <Text>Email</Text>
+            <Text>Nome do Dispositivo</Text>
             <TextInput
                 style={style.input}
-                onChange={name => setUser({...user, name})}
-                placeholder="Informe o email"
-                value={user.email}
+                onChangeText={deviceName => setDevice({...device, deviceName})}
+                placeholder="Informe o Nome do Dispositivo"
+                value={device.deviceName}
             />
-            <Text>Avatar URL</Text>
+            <Text>IP Adress</Text>
             <TextInput
                 style={style.input}
-                onChange={name => setUser({...user, name})}
-                placeholder="Informe a URL do seu avatar"
-                value={user.avatarUrl}
+                onChangeText={ip => setDevice({...device, ip})}
+                placeholder="Informe o endreço de Ip"
+                value={device.ip}
+            />
+            <Button
+                title="salvar"
+                onPress={submitData}
             />
         </View>
     )
