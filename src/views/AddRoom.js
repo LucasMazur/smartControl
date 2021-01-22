@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { Text, TextInput, View, StyleSheet, Button } from 'react-native'
+import { Text, TextInput, View, Button } from 'react-native'
+
+import styles from '../styles/style'
 
 export default ({ route, navigation }) => {
     
     const [device, setDevice] = useState(route.params ? route.params : {})
-
-    // const [deviceName, setDeviceName] = useState('')
-    // const [roomName, setRoomName] = useState('')
-    // const [ip, setIp] = useState('')
 
     function submitData() {
         // fetch('http://172.16.30.171:3001/api/userDevices/save', {
@@ -36,24 +34,24 @@ export default ({ route, navigation }) => {
     }
 
     return (
-        <View style={style.form}>
+        <View style={styles.form}>
             <Text>Nome do Cômodo</Text>
             <TextInput
-                style={style.input}
+                style={styles.input}
                 onChangeText={(roomName) => setDevice({...device, roomName})}                
                 placeholder="Informe o Nome do Cômodo"
                 value={device.roomName}
             />
             <Text>Nome do Dispositivo</Text>
             <TextInput
-                style={style.input}
+                style={styles.input}
                 onChangeText={deviceName => setDevice({...device, deviceName})}
                 placeholder="Informe o Nome do Dispositivo"
                 value={device.deviceName}
             />
             <Text>IP Adress</Text>
             <TextInput
-                style={style.input}
+                style={styles.input}
                 onChangeText={ip => setDevice({...device, ip})}
                 placeholder="Informe o endreço de Ip"
                 value={device.ip}
@@ -65,15 +63,3 @@ export default ({ route, navigation }) => {
         </View>
     )
 }
-
-const style = StyleSheet.create({
-    form: {
-        padding: 12
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-    }
-})

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { encode } from "react-native-base64"
+import { View, Text, FlatList, Image, TouchableOpacity, Button } from 'react-native';
+
+import styles from '../styles/style'
 
 export default props => {
 
@@ -26,7 +27,12 @@ export default props => {
     function getDevice ({item: device}) {
         return (
             <TouchableOpacity style={styles.button} onPress={() => {turnLight()}}>
-                <Text>{device.deviceName}</Text>
+                <Text style={styles.text} >{device.deviceName}</Text>
+                <View style={styles.containerButtons}>
+                    <Button color="#000" style={styles.buttonOut} title="saída 1"/>
+                    <Button color="#000" style={styles.buttonOut} title="saída 2"/>
+                    <Button color="#000" style={styles.buttonOut} title="saída 3"/>
+                </View>
             </TouchableOpacity>
         )
     }
@@ -41,11 +47,11 @@ export default props => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.containerRoom}>
             <Image source={{uri: props.route.params.image}} style={styles.pins} />
             <Text style={styles.title}>{props.route.params.room}</Text>
             <FlatList
-                numColumns={2}
+                numColumns={1}
                 keyExtractor={user => user._id.toString()}
                 data={data}
                 renderItem={getDevice}
@@ -53,31 +59,3 @@ export default props => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({ 
-    button: {
-        padding: 5,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: '#D3D3D3',
-        width: 120,
-        height: 120,
-        margin: 15,
-        borderRadius: 20,
-    },
-    pins: {
-        margin: 15,
-        width: 100,
-        height: 100,
-    },
-    container: {
-        flex: 1,
-        padding: 5,
-        backgroundColor: "#ffffff",
-        alignItems: "center", 
-    },
-    title: {
-        fontSize: 20,
-        marginBottom: 20,
-    }
-})

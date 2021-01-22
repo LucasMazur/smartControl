@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, Text, FlatList, Alert, Image, StyleSheet, SafeAreaView } from 'react-native'
-import { Avatar, Button, Divider, Icon, ListItem } from 'react-native-elements'
+import { Image, SafeAreaView } from 'react-native'
 import GetRooms from '../Components/getRooms'
+
+import styles from '../styles/style'
 
 import logo from '../img/logo.png'
 
@@ -14,19 +15,3 @@ export default props => {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    logo: {
-        width: 300,
-        height: 100,
-        marginTop: 30,
-        marginBottom: 20,
-    },
-    container: {
-        flex: 1,
-        padding: 5,
-        alignItems: "center",
-        justifyContent: 'space-evenly',
-        backgroundColor: "#ffffff",
-    },
-})

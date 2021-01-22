@@ -18,7 +18,7 @@ export default props => {
         return (
             <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Room", {room: device.roomName, image: device.imageUrl})}>
                 <Avatar style={styles.pins} source={{uri: device.imageUrl}} />
-                <Text>{device.roomName}</Text>
+                <Text style={styles.text}>{device.roomName}</Text>
             </TouchableOpacity>
         )
     }
@@ -48,5 +48,8 @@ const styles = StyleSheet.create({
         margin: 15,
         width: 40,
         height: 40,
+    },
+    text: {
+        textTransform: 'uppercase',
     }
 })
