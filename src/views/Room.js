@@ -8,14 +8,14 @@ export default props => {
     const [data, setData] = useState ('')
 
     useEffect(() => {
-        fetch('http://172.16.30.171:3001/api/userDevices/get', {
+        fetch('http://172.16.30.53:3001/api/userDevices/get', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                room: props.route.params.room
+                roomName: props.route.params.room
             })
         })
         .then((res) => res.json())
@@ -26,19 +26,14 @@ export default props => {
 
     function getDevice ({item: device}) {
         return (
-            <TouchableOpacity style={styles.button} onPress={() => {turnLight()}}>
+            <TouchableOpacity style={styles.button} onPress={() => {turnLight(device)}}>
                 <Text style={styles.text} >{device.deviceName}</Text>
-                <View style={styles.containerButtons}>
-                    <Button color="#000" style={styles.buttonOut} title="saída 1"/>
-                    <Button color="#000" style={styles.buttonOut} title="saída 2"/>
-                    <Button color="#000" style={styles.buttonOut} title="saída 3"/>
-                </View>
             </TouchableOpacity>
         )
     }
 
-    function turnLight() {
-        fetch('http://172.16.30.201/', {
+    function turnLight(device) {
+        fetch(`http://${device.ip}/${device.out}`, {
             method: 'POST',
             body: JSON.stringify({
                 saida: "01"

@@ -5,6 +5,7 @@ import Home from './views/Home'
 import AddRoom from './views/AddRoom'
 import Room from './views/Room'
 import { Button, Icon } from 'react-native-elements'
+import wifi from 'react-native-android-wifi'
 
 const Stack = createStackNavigator()
 
@@ -22,7 +23,17 @@ export default props => {
                                 title: "Home",
                                 headerRight: () => (
                                     <Button
-                                        onPress={() => navigation.navigate("AddRoom")}
+                                        onPress={() => {
+                                            // wifi.forceWifiUsage(true)
+                                            // wifi.findAndConnect("AlumbraServer", "", (found) => {
+                                            //     if (found) {
+                                            //       console.log("wifi is in range");
+                                            //     } else {
+                                            //       console.log("wifi is not in range");
+                                            //     }
+                                            // });
+                                            navigation.navigate("AddRoom")
+                                        }}
                                         type="clear"
                                         icon={<Icon name="add" size={25} color="white" />}
                                     />

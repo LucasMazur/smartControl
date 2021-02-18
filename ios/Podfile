@@ -10,6 +10,10 @@ target 'smartControl' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNWifi', :path => '../node_modules/react-native-wifi'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'smartControlTests' do
     inherit! :complete
     # Pods for testing

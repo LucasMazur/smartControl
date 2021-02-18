@@ -23,6 +23,13 @@ export default StyleSheet.create({
         borderWidth: 1,
         marginBottom: 10,
     },
+    saveButton: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 50,
+        backgroundColor: '#36523CFF',
+        fontSize: 15,
+    },
     button: {
         padding: 5,
         alignItems: "center",
@@ -45,7 +52,7 @@ export default StyleSheet.create({
         alignItems: "center", 
     },
     title: {
-        fontSize: 20,
+        fontSize: 25,
         marginBottom: 20,
     },
     containerButtons: {
@@ -53,10 +60,28 @@ export default StyleSheet.create({
         flexDirection: "row",
     },
     text: {
-        fontSize: 20,
+        fontSize: 15,
         textTransform: 'uppercase',
     },
     buttonOut: {
         marginRight: 30,
+    },
+    buttonRooms: {
+        padding: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: '#D3D3D3',
+        width: 120,
+        height: 120,
+        margin: 15,
+        borderRadius: 20,
+    },
+    pinsRooms: {
+        margin: 15,
+        width: 40,
+        height: 40,
+    },
+    textRooms: {
+        textTransform: 'uppercase',
     }
 })
