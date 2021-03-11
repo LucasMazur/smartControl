@@ -15,7 +15,7 @@ export default props => {
             <Stack.Navigator
                 initialRouteName="Home"
                 screenOptions={screenOptions}>
-                    <Stack.Screen 
+                    <Stack.Screen
                         name="Home"
                         component={Home}
                         options={({ navigation }) => {

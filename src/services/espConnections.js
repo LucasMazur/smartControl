@@ -62,8 +62,7 @@ export default ({ visible, children }) => {
   }
 
   if(visible) {
-    return (
-    
+    return (    
       <Animated.View style={{ height: animatedHeight, width: animatedWidth, backgroundColor: '#555' }}>      
       </Animated.View>
     )

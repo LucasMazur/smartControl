@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, Button } from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import Slider from '@react-native-community/slider'
 
 import styles from '../styles/style'
 
 export default props => {
 
     const [data, setData] = useState ('')
+    const [slider, setSlider] = useState ('')
 
     useEffect(() => {
         fetch('http://172.16.30.53:3001/api/userDevices/get', {
@@ -26,17 +28,31 @@ export default props => {
 
     function getDevice ({item: device}) {
         return (
-            <TouchableOpacity style={styles.button} onPress={() => {turnLight(device)}}>
-                <Text style={styles.text} >{device.deviceName}</Text>
-            </TouchableOpacity>
+            <>
+                <TouchableOpacity style={styles.button} onPress={() => {turnLight(device)}}>
+                    <Text style={styles.text} >{device.deviceName}</Text>
+                </TouchableOpacity>
+                <Slider
+                    minimumValue={0}
+                    maximumValue={99}
+                    onSlidingComplete={(value) => {
+                        setSlider(value)
+                        console.log(value)
+                    }} 
+                />
+            </>
         )
     }
 
     function turnLight(device) {
-        fetch(`http://${device.ip}/${device.out}`, {
+        fetch(`http://${device.ip}/turnOut?out=${device.out}`, {
             method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
-                saida: "01"
+                out: device.out
             })
         })
     }
